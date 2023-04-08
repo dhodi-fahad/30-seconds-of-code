@@ -44,3 +44,49 @@ rect2 = Rectangle(2, 10)
 
 print(rect1 == rect2)  # False
 print(rect1 < rect2)  # True
+
+
+# ------ More About Magic Methods ------
+
+class User:
+    def __init__(self, id, username, password):
+        self.id = id
+        self.username = username
+        self.password = password
+
+    def __getitem__(self, item):
+        if self.id == item:
+            return {'id': self.id,'username': self.username, 'password': self.password}
+        else:
+            return None
+
+    def __eq__(self, other):
+        if isinstance(other, User):
+            return self.id == other.id and self.username == other.username and self.password == other.password
+        return False
+
+
+class Authenticator:
+    def __init__(self, users):
+        self.users = users
+
+    def authenticate(self, id, username, password):
+        user = User(id, username, password)
+        if user in self.users:
+            return True
+        return False
+
+
+u1 = User(1, 'john', 'password1')
+u2 = User(2, 'doe', 'password2')
+u3 = User(3, 'mark', 'password3')
+u4 = User(4, 'james', 'password4')
+u5 = User(5, 'peter', 'password5')
+u6 = User(6, 'fahad', 'password6')
+users = [u1, u2, u3, u4, u5, u6]
+
+auth = Authenticator(users)
+user_to_authenticate = u6[6]
+result = auth.authenticate(user_to_authenticate['id'], user_to_authenticate['username'], user_to_authenticate['password'])
+print(result)
+
