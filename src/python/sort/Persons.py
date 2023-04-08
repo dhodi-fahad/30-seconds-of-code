@@ -27,7 +27,7 @@ class Person:
         self.age = age
 
     def __str__(self):
-        return f"Person -- {self.firstname} {self.lastname}, {self.age}"
+        return f'{self.firstname} {self.lastname}, {self.age}'
 
     def __eq__(self, other):
         return self.age == other.age
@@ -47,3 +47,4 @@ person3 = Person("Bob", "Smith", 20)
 people = [person1, person2, person3]
 sorted_people = sort_people(people)
 print(sorted_people)
+
